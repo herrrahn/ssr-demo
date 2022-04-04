@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
+import {AppService} from "./app.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ssr-demo';
+
+  text = ' ';
+
+  constructor(private appService: AppService) {
+  }
+
+
+  click() {
+    this.appService.testDemo().subscribe( d => this.text = d);
+  }
+
+  @HostListener('click')
+  pageClick() {
+    this.text = 'page click'
+  }
 }
